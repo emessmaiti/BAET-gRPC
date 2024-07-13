@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: transaktionen-service
+
+server:
+  port: 8088
+
+grpc:
+  server:
+    port: 9088
+  client:
+    finanzdaten-service:
+      address: 'discovery:///finanzdaten-service'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+
+
+
+spring.datasource:
+  url: jdbc:h2:mem:tndb
+  driver-class-name: org.h2.Driver
+  username: sa
+  password:
+
+spring.jpa:
+  database-platform: org.hibernate.dialect.H2Dialect
+
+spring.h2.console.enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true

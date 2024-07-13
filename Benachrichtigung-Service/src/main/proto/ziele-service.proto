@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "de.th.koeln.finanzdaten.grpc";
+option java_outer_classname = "ZieleServiceProto";
+
+service FinanzdatenService {
+  rpc GetFinanzielleZiele (GetFinanzielleZieleRequest) returns (GetFinanzielleZieleResponse);
+}
+
+message GetFinanzielleZieleRequest {}
+
+message GetFinanzielleZieleResponse {
+  repeated FinanzdatenDTO ziele = 1;
+}
+
+message FinanzdatenDTO {
+  string benutzerID = 1;
+  string kategorie = 2;
+  string bezeichnung = 3;
+  string beschreibung = 4;
+  string datum = 5;
+  string budget = 6;
+  string betrag = 7;
+  float sparBetrag = 8;
+  string faelligkeitDatum = 9;
+
+}

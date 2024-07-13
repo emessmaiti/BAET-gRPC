@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "de.th.koeln.kontoservice.grpc";
+option java_outer_classname = "KontoServiceProto";
+
+service KontoService {
+  rpc CreateKonto (CreateKontoRequest) returns (CreateKontoResponse);
+  rpc FindByBenutzerId (FindByBenutzerIdRequest) returns (FindByBenutzerIdResponse);
+}
+
+message CreateKontoRequest {
+  KontoDaten konto = 1;
+}
+
+message CreateKontoResponse {
+  KontoDaten konto = 1;
+}
+
+message FindByBenutzerIdRequest {
+  string benutzerId = 1;
+}
+
+message FindByBenutzerIdResponse {
+  KontoDaten konto = 1;
+}
+
+message KontoDaten {
+  string id = 1;
+  string benutzerId = 2;
+  string kontostand = 3;
+}

@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: finanzdaten-service
+
+server:
+  port: 8086
+
+grpc:
+  server:
+    port: 9096
+  client:
+    konto-service:
+      address: 'discovery:///konto-service'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+    benutzer-service:
+      address: 'discovery:///benutzer-service'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+
+
+spring.datasource:
+  url: jdbc:h2:mem:fndb
+  driver-class-name: org.h2.Driver
+  username: sa
+  password:
+
+spring.jpa:
+  database-platform: org.hibernate.dialect.H2Dialect
+
+spring.h2.console.enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true

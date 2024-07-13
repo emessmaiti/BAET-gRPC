@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: mail-service
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: noreply.example.ba@gmail.com
+    password: 'jlvsiysxbbeitlgs'
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+grpc:
+  client:
+    benutzer-service:
+      address: 'discovery:///benutzer-service'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+    finanzdaten-service:
+      address: 'discovery:///finanzdaten-service'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+
+
+
+server:
+  port: 8100
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true

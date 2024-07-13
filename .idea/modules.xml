@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/BA_gRPC.iml" filepath="$PROJECT_DIR$/.idea/BA_gRPC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Benachrichtigung-Service/Benachrichtigung-Service.iml" filepath="$PROJECT_DIR$/Benachrichtigung-Service/Benachrichtigung-Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Finanzdaten-Service/Finanzdaten-Service.iml" filepath="$PROJECT_DIR$/Finanzdaten-Service/Finanzdaten-Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Transaktionen-Service/Transaktionen-Service.iml" filepath="$PROJECT_DIR$/Transaktionen-Service/Transaktionen-Service.iml" />
+    </modules>
+  </component>
+</project>

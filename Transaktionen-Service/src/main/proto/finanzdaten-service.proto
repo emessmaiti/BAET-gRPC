@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "de.th.koeln.finanzdaten.grpc";
+option java_outer_classname = "FinanzdatenServiceProto";
+
+service FinanzdatenService {
+  rpc GetEinnahmenDesMonats (GetEinnahmenDesMonatsRequest) returns (GetEinnahmenDesMonatsResponse);
+  rpc GetAusgabenDesMonats (GetAusgabenDesMonatsRequest) returns (GetAusgabenDesMonatsResponse);
+}
+
+message GetEinnahmenDesMonatsRequest {
+  string kontoId = 1;
+}
+
+message GetEinnahmenDesMonatsResponse {
+  repeated FinanzdatenDTO einnahmen = 1;
+}
+
+message GetAusgabenDesMonatsRequest {
+  string kontoId = 1;
+}
+
+message GetAusgabenDesMonatsResponse {
+  repeated FinanzdatenDTO ausgaben = 1;
+}
+
+message FinanzdatenDTO {
+  string benutzerID = 1;
+  string kategorie = 2;
+  string bezeichnung = 3;
+  string beschreibung = 4;
+  string datum = 5;
+  string budget = 6;
+  string betrag = 7;
+}

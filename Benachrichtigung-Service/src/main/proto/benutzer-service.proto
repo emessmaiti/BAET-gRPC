@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "de.th.koeln.benutzerservice.grpc";
+option java_outer_classname = "BenutzerServiceProto";
+
+service BenutzerService{
+  rpc getBenutzerBySub(GetBenutzerBySubRequest) returns (GetBenutzerBySubResponse);
+
+}
+
+message GetBenutzerBySubRequest{
+  string sub = 1;
+}
+
+message GetBenutzerBySubResponse{
+  BenutzerDaten benutzer = 1;
+}
+
+message BenutzerDaten {
+  string id = 1;
+  string email = 2;
+  string vorname = 3;
+  string nachname = 4;
+  string geschlecht = 5;
+  string sub = 6;
+}
+
+message Empty {}
