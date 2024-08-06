@@ -18,6 +18,12 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Controller-Klasse für die Authentifizierung und Benutzerverwaltung.
+ *
+ * Diese Klasse stellt Endpunkte bereit, um Authentifizierungsdetails des aktuellen Benutzers
+ * abzurufen, den Login-Prozess zu verarbeiten und das Access Token des Benutzers zurückzugeben.
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthentifizierungController {
@@ -25,6 +31,12 @@ public class AuthentifizierungController {
     private final KontoGrpcClient kontoGrpcClient;
     private final BenutzerGrpcClient benutzerGrpcClient;
 
+    /**
+     * Konstruktor für AuthentifizierungController.
+     *
+     * @param kontoGrpcClient Der gRPC-Client für Kontodienste.
+     * @param benutzerGrpcClient Der gRPC-Client für Benutzerdienste.
+     */
     @Autowired
     public AuthentifizierungController(KontoGrpcClient kontoGrpcClient, BenutzerGrpcClient benutzerGrpcClient) {
         this.kontoGrpcClient = kontoGrpcClient;
@@ -42,6 +54,17 @@ public class AuthentifizierungController {
         return authentication;
     }
 
+    /**
+     * Verarbeitet den erfolgreichen Login eines Benutzers.
+     *
+     * Diese Methode wird aufgerufen, wenn ein Benutzer sich erfolgreich anmeldet.
+     * Sie aktualisiert die Benutzerdaten und das Konto des Benutzers und leitet dann
+     * auf eine spezifische URL weiter.
+     *
+     * @param oidcUser Der authentifizierte OIDC-Benutzer.
+     * @param response Die HTTP-Antwort.
+     * @throws IOException Wenn ein I/O-Fehler auftritt.
+     */
     @GetMapping("/loginSuccess")
     public void loginSuccess(@AuthenticationPrincipal OidcUser oidcUser, HttpServletResponse response) throws IOException, IOException {
         String accessToken = oidcUser.getIdToken().getTokenValue();

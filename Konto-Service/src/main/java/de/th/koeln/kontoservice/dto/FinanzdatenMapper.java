@@ -1,4 +1,4 @@
-package de.th.koeln.transaktionenservice.dto;
+package de.th.koeln.kontoservice.dto;
 
 import de.th.koeln.finanzdaten.grpc.FinanzdatenDTO;
 

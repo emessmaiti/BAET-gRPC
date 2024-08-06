@@ -1,11 +1,22 @@
 package de.th.koeln.benachrichtigungservice.dtos;
 
+/**
+ * Data Transfer Object (DTO) für Benutzerdaten.
+ *
+ * Diese Klasse repräsentiert die Benutzerdaten, die zwischen den Schichten
+ * der Anwendung übertragen werden.
+ */
 public class BenutzerDTO {
 
     private String benutzerID;
     private String email;
 
+    /**
+     * Standardkonstruktor.
+     */
     public BenutzerDTO () {}
+
+    //Getter und Setter
 
     public String getBenutzerID() {
         return benutzerID;

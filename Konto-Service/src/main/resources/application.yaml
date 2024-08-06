@@ -8,6 +8,12 @@ server:
 grpc:
   server:
     port: 9098
+  client:
+    finanzdaten-service:
+      address: 'discovery:///finanzdaten-service'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
 
 
 spring.datasource:

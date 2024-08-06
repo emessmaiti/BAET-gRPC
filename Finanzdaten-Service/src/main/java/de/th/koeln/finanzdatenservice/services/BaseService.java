@@ -132,6 +132,14 @@ public abstract class BaseService<T extends AbstraktEntitaet> {
         throw new NotFoundException("Konto mit der ID " + kontoId + " nicht gefunden.");
     }
 
+    /**
+     * Findet eine Entität basierend auf der Konto-ID.
+     *
+     *
+     * @param kontoId Die ID des Kontos, nach der gesucht werden soll.
+     * @return Die gefundene Entität.
+     * @throws NotFoundException Wenn keine Entität mit der angegebenen Konto-ID gefunden wird.
+     */
     public T findByKontoId( Long kontoId){
         Optional<T> entity = this.repository.findById(kontoId);
         if (entity.isPresent()) {
@@ -140,6 +148,13 @@ public abstract class BaseService<T extends AbstraktEntitaet> {
         throw new NotFoundException("Konto mit der ID " + kontoId + " nicht gefunden.");
     }
 
+    /**
+     * Findet alle Einträge einer bestimmten Entität.
+     *
+     * Diese Methode ruft alle Einträge der angegebenen Entität aus der Repository ab.
+     *
+     * @return Eine Liste aller Einträge der Entität.
+     */
     public List<T> findAll(){
         return this.repository.findAll();
     }

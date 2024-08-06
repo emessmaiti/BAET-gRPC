@@ -5,29 +5,10 @@ option java_package = "de.th.koeln.finanzdaten.grpc";
 option java_outer_classname = "FinanzdatenServiceProto";
 
 service FinanzdatenService {
-  rpc GetEinnahmenDesMonats (GetEinnahmenDesMonatsRequest) returns (GetEinnahmenDesMonatsResponse);
-  rpc GetAusgabenDesMonats (GetAusgabenDesMonatsRequest) returns (GetAusgabenDesMonatsResponse);
   rpc GetAlleEinnahmen (GetAlleEinnahmenRequest) returns (GetAlleEinnahmenResponse);
   rpc GetAlleAusgaben (GetAlleAusgabenRequest) returns (GetAlleAusgabenResponse);
-  rpc GetFinanzielleZiele (GetFinanzielleZieleRequest) returns (GetFinanzielleZieleResponse);
   rpc GetEinnahmenSumme (GetEinnahmenSummeRequest) returns (GetEinnahmenSummeResponse);
   rpc GetAusgabenSumme (GetAusgabenSummeRequest) returns (GetAusgabenSummeResponse);
-}
-
-message GetEinnahmenDesMonatsRequest {
-  string kontoId = 1;
-}
-
-message GetEinnahmenDesMonatsResponse {
-  repeated FinanzdatenDTO einnahmen = 1;
-}
-
-message GetAusgabenDesMonatsRequest {
-  string kontoId = 1;
-}
-
-message GetAusgabenDesMonatsResponse {
-  repeated FinanzdatenDTO ausgaben = 1;
 }
 
 message GetAlleEinnahmenRequest{
@@ -46,18 +27,12 @@ message GetAlleAusgabenResponse {
   repeated FinanzdatenDTO ausgaben = 1;
 }
 
-message GetFinanzielleZieleRequest {}
-
-message GetFinanzielleZieleResponse {
-  repeated FinanzdatenDTO ziele = 1;
-}
-
 message GetEinnahmenSummeRequest {
   string kontoId = 1;
 }
 
 message GetEinnahmenSummeResponse {
-   double einnahmenSumme = 1;
+  double einnahmenSumme = 1;
 }
 
 message GetAusgabenSummeRequest{
@@ -65,7 +40,7 @@ message GetAusgabenSummeRequest{
 }
 
 message GetAusgabenSummeResponse{
-   double ausgabensumme = 1;
+  double ausgabensumme = 1;
 }
 
 message FinanzdatenDTO {
@@ -76,6 +51,4 @@ message FinanzdatenDTO {
   string datum = 5;
   string budget = 6;
   string betrag = 7;
-  float sparBetrag = 8;
-  string faelligkeitDatum = 9;
 }

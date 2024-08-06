@@ -1,6 +1,40 @@
 spring:
   application:
     name: finanzdaten-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/finanzdaten_service
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Ba@2024
+    hikari:
+      maximum-pool-size: 100
+      minimum-idle: 10
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      pool-name: HikariPool
+
+
+# Kommentierte MySQL Datenbank Konfiguration für H2 Konfiguration
+# spring:
+#   datasource:
+#     url: jdbc:h2:mem:testdb                              # H2 Datenbank URL
+#     driver-class-name: org.h2.Driver                      # H2 Treiber
+#     username: sa                                          # H2 Standard Benutzername
+#     password: password                                    # H2 Standard Passwort
+#     hikari:
+#       maximum-pool-size: 100                              # HikariCP Konfiguration
+#       minimum-idle: 10                                    # HikariCP Konfiguration
+#       idle-timeout: 30000                                 # HikariCP Konfiguration
+#       max-lifetime: 1800000                               # HikariCP Konfiguration
+#       connection-timeout: 30000                           # HikariCP Konfiguration
+#       pool-name: HikariPool                               # HikariCP Konfiguration
+#   jpa:
+#     hibernate:
+#       ddl-auto: update                                    # JPA Konfiguration
+#     show-sql: true                                        # JPA Konfiguration
+#     properties:
+#       hibernate.dialect: org.hibernate.dialect.H2Dialect  # H2 Dialekt
 
 server:
   port: 8086
@@ -21,16 +55,12 @@ grpc:
       negotiationType: plaintext
 
 
-spring.datasource:
-  url: jdbc:h2:mem:fndb
-  driver-class-name: org.h2.Driver
-  username: sa
-  password:
-
-spring.jpa:
-  database-platform: org.hibernate.dialect.H2Dialect
-
-spring.h2.console.enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQLDialect
 
 eureka:
   client:

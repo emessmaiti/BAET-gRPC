@@ -4,7 +4,6 @@ import de.th.koeln.benutzerservice.grpc.BenutzerDaten;
 import de.th.koeln.finanzdatenservice.clients.BenutzerGrpcClient;
 import de.th.koeln.finanzdatenservice.entities.FinanzielleZiel;
 import de.th.koeln.finanzdatenservice.repositories.BaseRepository;
-import de.th.koeln.finanzdatenservice.repositories.FinanzielleZielRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +28,14 @@ public class FinanzielleZielService extends BaseService<FinanzielleZiel> {
         this.benutzerClient = benutzerClient;
     }
 
+    /**
+     * Findet Benutzerdaten basierend auf der Benutzer-ID.
+     *
+     * Diese Methode ruft die Benutzerdaten für die gegebene Benutzer-ID vom Benutzer-Client ab.
+     *
+     * @param id Die ID des Benutzers.
+     * @return Die Benutzerdaten.
+     */
     public BenutzerDaten findBenutzerById(String id) {
         return benutzerClient.findBenutzerById(id);
     }

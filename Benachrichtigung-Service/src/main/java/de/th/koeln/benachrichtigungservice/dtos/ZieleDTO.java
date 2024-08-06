@@ -3,6 +3,12 @@ package de.th.koeln.benachrichtigungservice.dtos;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Data Transfer Object (DTO) für finanzielle Ziele.
+ *
+ * Diese Klasse repräsentiert die Daten zu finanziellen Zielen, die zwischen den Schichten
+ * der Anwendung übertragen werden.
+ */
 public class ZieleDTO {
 
     private String benutzerId;
@@ -10,7 +16,12 @@ public class ZieleDTO {
     private LocalDate faelligkeitDatum;
     private String zielName;
 
+    /**
+     * Standardkonstruktor.
+     */
     public ZieleDTO(){}
+
+    //Getter und Setter
 
     public String getBenutzerId() {
         return benutzerId;

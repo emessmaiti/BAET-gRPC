@@ -7,6 +7,8 @@ import de.th.koeln.finanzdatenservice.services.BaseService;
 import de.th.koeln.finanzdatenservice.services.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -48,12 +50,14 @@ public class BudgetController extends BaseController<Budget> {
      * Fügt eine Ausgabe einem Budget hinzu.
      *
      * @param budgetId Die ID des Budgets.
-     * @param ausgabe Die hinzuzufügende Ausgabe.
+     * @param ausgabe  Die hinzuzufügende Ausgabe.
      * @return Das aktualisierte Budget als ResponseEntity.
      */
     @PostMapping("/{budgetId}/ausgaben")
-    public ResponseEntity<Budget> addAusgabeToBudget(@PathVariable Long budgetId, @RequestBody Ausgabe ausgabe) {
+    public ResponseEntity<Budget> addAusgabeToBudget(@PathVariable Long budgetId, @RequestBody Ausgabe ausgabe
+            , @AuthenticationPrincipal Jwt jwt) {
         Budget budget = service.findById(budgetId).orElseThrow(() -> new NotFoundException("Budget not found"));
+        ausgabe.setBenutzerID(jwt.getSubject());
         ausgabe.setBudget(budget);
         Budget updatedBudget = service.addAusgabeToBudget(ausgabe);
         return ResponseEntity.ok(updatedBudget);
@@ -62,7 +66,7 @@ public class BudgetController extends BaseController<Budget> {
     /**
      * Entfernt eine Ausgabe aus einem Budget.
      *
-     * @param budgetId Die ID des Budgets.
+     * @param budgetId  Die ID des Budgets.
      * @param ausgabeId Die ID der zu entfernenden Ausgabe.
      * @return Das aktualisierte Budget als ResponseEntity.
      */

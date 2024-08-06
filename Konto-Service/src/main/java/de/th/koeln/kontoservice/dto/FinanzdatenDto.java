@@ -1,4 +1,4 @@
-package de.th.koeln.transaktionenservice.dto;
+package de.th.koeln.kontoservice.dto;
 
 /**
  * Data Transfer Object (DTO) für Finanzdaten.
@@ -74,3 +74,4 @@ public class FinanzdatenDto {
         this.betrag = betrag;
     }
 }
+

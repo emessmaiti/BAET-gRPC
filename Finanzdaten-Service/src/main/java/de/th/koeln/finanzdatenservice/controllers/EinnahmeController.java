@@ -89,9 +89,8 @@ public class EinnahmeController extends BaseController<Einnahme> {
      */
     @GetMapping("/getSumme")
     public ResponseEntity<BigDecimal> getSumme(@AuthenticationPrincipal Jwt jwt) {
-        BigDecimal summe = BigDecimal.ZERO;
         String benutzerID = jwt.getSubject();
-        summe = this.service.getSummeEinnahmenDesMonat(benutzerID);
+        BigDecimal summe = this.service.getSummeEinnahmenDesMonat(benutzerID);
         return ResponseEntity.ok(summe);
     }
 

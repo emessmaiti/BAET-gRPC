@@ -10,6 +10,7 @@
         <module name="Transaktionen-Service" />
         <module name="Service-Discovery" />
         <module name="Benutzerdaten-Service" />
+        <module name="Gateway-Service" />
         <module name="Finanzdaten-Service" />
         <module name="Konto-Service" />
         <module name="Benachrichtigung-Service" />
@@ -21,6 +22,7 @@
       <module name="Benachrichtigung-Service" options="-parameters" />
       <module name="Benutzerdaten-Service" options="-parameters" />
       <module name="Finanzdaten-Service" options="-parameters" />
+      <module name="Gateway-Service" options="-parameters" />
       <module name="Konto-Service" options="-parameters" />
       <module name="Service-Discovery" options="-parameters" />
       <module name="Transaktionen-Service" options="-parameters" />

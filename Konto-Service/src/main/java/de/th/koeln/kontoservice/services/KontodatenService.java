@@ -1,5 +1,9 @@
 package de.th.koeln.kontoservice.services;
 
+import de.th.koeln.finanzdaten.grpc.FinanzdatenDTO;
+import de.th.koeln.kontoservice.clients.FinanzdatenClient;
+import de.th.koeln.kontoservice.dto.FinanzdatenDto;
+import de.th.koeln.kontoservice.dto.FinanzdatenMapper;
 import de.th.koeln.kontoservice.entities.Kontodaten;
 import de.th.koeln.kontoservice.exceptions.NotFoundException;
 import de.th.koeln.kontoservice.repositories.KontodatenRepository;
@@ -7,7 +11,10 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service zur Verwaltung von Kontodaten.
@@ -20,10 +27,12 @@ import java.util.Optional;
 public class KontodatenService {
 
     private final KontodatenRepository repository;
+    private final FinanzdatenClient client;
 
     @Autowired
-    public KontodatenService(KontodatenRepository repository) {
+    public KontodatenService(KontodatenRepository repository, FinanzdatenClient client) {
         this.repository = repository;
+        this.client = client;
     }
 
     /**
@@ -88,5 +97,53 @@ public class KontodatenService {
         return Optional.ofNullable(this.repository.findKontodatenByBenutzerId(benutzerId));
     }
 
+    /**
+     * Berechnet den Kontostand anhand der Konto-ID.
+     *
+     * @param kontoId Die Konto-ID.
+     * @return Der berechnete Kontostand.
+     */
+    public BigDecimal getKontoStandByKontoId(Long kontoId) {
+        Optional<Kontodaten> kontoOpt = findKontoById(kontoId);
+
+        if (kontoOpt.isEmpty()) {
+            throw new NotFoundException("Konto nicht gefunden: " + kontoId);
+        }
+        Kontodaten kontodaten = kontoOpt.get();
+        BigDecimal einnahmeSumme = this.client.getEinnahmenSumme(kontoId);
+        BigDecimal ausgabeSumme = this.client.getAusgabenSumme(kontoId);
+        BigDecimal kontostand = einnahmeSumme.subtract(ausgabeSumme);
+        kontodaten.setKontostand(kontostand);
+        this.repository.save(kontodaten);
+        return kontostand;
+    }
+
+    /**
+     * Holt alle Einnahmen eines Kontos anhand der Konto-ID.
+     *
+     * @param kontoId Die Konto-ID.
+     * @return Eine Menge von Einnahmen-Daten-Transfer-Objekten (EinnahmeDTO) des Kontos.
+     */
+    public List<FinanzdatenDto> findAllEinnahmenByKontoId(Long kontoId) {
+        List<FinanzdatenDTO> einnahmenProto = this.client.getAlleEinnahmen(kontoId);
+
+        return  einnahmenProto.stream()
+                .map(FinanzdatenMapper::toDto)
+                .toList();
+    }
+
+    /**
+     * Holt alle Ausgaben eines Kontos anhand der Konto-ID.
+     *
+     * @param kontoId Die Konto-ID.
+     * @return Eine Iterable von Ausgaben-Daten-Transfer-Objekten (AusgabenDTO) des Kontos.
+     */
+    public Iterable<FinanzdatenDto> findAllAusgabenByKontoId(Long kontoId) {
+        List<FinanzdatenDTO> ausgabenProto = this.client.getAlleAusgaben(kontoId);
+
+        return ausgabenProto.stream()
+                .map(FinanzdatenMapper::toDto)
+                .toList();
+    }
 
 }

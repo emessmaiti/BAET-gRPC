@@ -52,7 +52,7 @@ public class AusgabeController extends BaseController<Ausgabe> {
      * Holt alle Ausgaben eines Benutzers für den aktuellen Monat, sortiert nach Datum absteigend.
      *
      * @param benutzerID Die ID des Benutzers.
-     * @return Eine Menge von Ausgaben des Benutzers für den aktuellen Monat, sortiert nach Datum absteigend.
+     * @return Eine Menge von Ausgaben des Benutzers für den aktuellen Monat sortiert nach Datum absteigend.
      */
     @GetMapping("all/monat/{benutzerID}/desc")
     public Set<Ausgabe> getAlleAusgabenByMonatDesc(@PathVariable String benutzerID) {
